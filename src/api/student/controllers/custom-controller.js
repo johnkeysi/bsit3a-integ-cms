@@ -74,7 +74,36 @@ module.exports = {
         catch(error) {
             ctx.throw(500, error);
         }
-    }
+    },
         
+    //@ts-ignore
+    async deleteStudents(ctx) {
+        try {
+            
+            const { id } = ctx.params  
+
+            const checkIfExisting = await strapi.documents("api::student.student").findOne({
+                documentId: id
+            });
+            if(!checkIfExisting) {
+                return ctx.notFound('Student not found');
+            }
+
+            
+            const deleteStudent = await strapi.documents("api::student.student").delete({
+                documentId: id,});
+                ctx.body = {
+                    message: 'Student Deleted',
+                    status: 200,
+                }
+
+        }
+        catch(error) {
+            ctx.throw(500, error);
+        }
     
 }
+};
+
+
+

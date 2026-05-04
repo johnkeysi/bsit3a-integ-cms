@@ -11,6 +11,12 @@ module.exports = {
             method: 'POST',
             path: '/students/create',
             handler: 'custom-controller.createStudent'
+        },
+
+        {
+            method: 'DELETE',
+            path: '/students/:id',
+            handler: 'custom-controller.deleteStudents'
         }
 
     ],
